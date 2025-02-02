@@ -12,16 +12,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import com.example.calculatorfinal.ui.theme.CalculatorFinalTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val calculatorViewModel = ViewModelProvider(this)[CalculatorViewModel::class.java]
         enableEdgeToEdge()
         setContent {
             CalculatorFinalTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Calculator(modifier = Modifier.padding(innerPadding))
+                    Calculator(modifier = Modifier.padding(innerPadding),calculatorViewModel)
 
                 }
             }

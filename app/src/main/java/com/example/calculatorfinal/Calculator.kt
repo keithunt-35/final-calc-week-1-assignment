@@ -34,7 +34,7 @@ val bottonList = listOf(
 )
 
 @Composable
-fun Calculator(modifier: Modifier = Modifier){
+fun Calculator(modifier: Modifier = Modifier, viewModel: CalculatorViewModel){
     Box(modifier = modifier){
         Column(
             modifier = modifier.fillMaxSize(),
@@ -49,20 +49,24 @@ fun Calculator(modifier: Modifier = Modifier){
                 maxLines = 5,
                 overflow = TextOverflow.Ellipsis
             )
+            Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = "256",
                 style = TextStyle(
-                    fontSize = 30.sp,
+                    fontSize = 60.sp,
                     textAlign = TextAlign.End
                 ),
                 maxLines = 2,
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             LazyVerticalGrid(
                 columns = GridCells.Fixed(4),
             ) {
                 items(bottonList){
-                    CalculatorButton(btn = it)
+                    CalculatorButton(btn = it, onClick = {
+                        viewModel.onButtonClick(it)
+                    }
+                    )
                 }
             }
         }
@@ -71,10 +75,10 @@ fun Calculator(modifier: Modifier = Modifier){
 
 }
 @Composable
-fun CalculatorButton(btn: String){
-    Box(modifier = Modifier.padding(8.dp)){
+fun CalculatorButton(btn: String,onClick : ()->Unit){
+    Box(modifier = Modifier.padding(10.dp)){
         FloatingActionButton(
-            onClick = {/*todo*/},
+            onClick = onClick,
             modifier = Modifier.size(80.dp),
             containerColor = getColor(btn),
             contentColor = Color.White,
