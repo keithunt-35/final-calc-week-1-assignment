@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,7 +59,7 @@ fun Calculator(modifier: Modifier = Modifier){
                 columns = GridCells.Fixed(4),
             ) {
                 items(bottonList){
-                    Text(text = it)
+                    CalculatorButton(btn = it)
                 }
             }
         }
@@ -64,3 +67,14 @@ fun Calculator(modifier: Modifier = Modifier){
     }
 
 }
+@Composable
+fun CalculatorButton(btn: String){
+    Box(modifier = Modifier.padding(8.dp)){
+        FloatingActionButton(
+            onClick = {/*todo*/},
+        ) {
+            Text(text = btn)
+        }
+
+        }
+    }
