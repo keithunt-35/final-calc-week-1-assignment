@@ -15,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,13 +36,17 @@ val bottonList = listOf(
 
 @Composable
 fun Calculator(modifier: Modifier = Modifier, viewModel: CalculatorViewModel){
+
+    val equationText = viewModel.equationText.observeAsState()
+    val resultText = viewModel.resultText.observeAsState()
+
     Box(modifier = modifier){
         Column(
             modifier = modifier.fillMaxSize(),
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = "123+123",
+                text = equationText.value?:"",
                 style = TextStyle(
                     fontSize = 30.sp,
                     textAlign = TextAlign.End
@@ -51,7 +56,7 @@ fun Calculator(modifier: Modifier = Modifier, viewModel: CalculatorViewModel){
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "256",
+                text = resultText.value?:"",
                 style = TextStyle(
                     fontSize = 60.sp,
                     textAlign = TextAlign.End
